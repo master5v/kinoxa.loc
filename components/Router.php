@@ -1,48 +1,33 @@
 <?php
+namespace Components;
 
 class Router
 {
-    private $routes;
+    private $routes = array(
+        '^([a-z]+)$' => '$1/index',
+        '^([a-z]+)/([0-9]+)' => '$1/view/$2',
+        '^$' => 'main/index',
+    );
 
-    public function __construct()
-    {
-        $routsPath = ROOT . '/config/routes.php';
-        $this->routes = include($routsPath);
-    }
+//    public function __construct()
+//    {
+//        $routsPath = ROOT . '/config/routes.php';
+//        $this->routes = include($routsPath);
+//    }
 
-    private function getURI()
-    {
-        if (!empty($_SERVER['REQUEST_URI'])) {
-            return trim($_SERVER['REQUEST_URI'], '/');
-        }
-    }
 
-    public function run()
+    public function run($uri)
     {
-        $uri = $this->getURI();
 
         foreach ($this->routes as $uriPattern => $path) {
-//           echo $uri . '<br>';
 
             if (preg_match("~$uriPattern~", $uri)) {
 
-
                 $route = preg_replace("~$uriPattern~",$path, $uri);
-                debug($route);
+
                 $segments = explode('/', $route);
-                $controllerName = ucfirst(array_shift($segments));
+                $controllerName = "controllers\\" . ucfirst(array_shift($segments)) . "Controller";
                 $actionName =  array_shift($segments) . "Action";
-
-                $filePath = ROOT . "/controllers/" . $controllerName . ".php";
-                if (file_exists($filePath)) {
-                    include_once($filePath);
-                }else{
-                    include "404.html";
-                    die();
-                }
-
-                debug($controllerName);
-                debug($actionName);
 
 
                 if (class_exists($controllerName)){
