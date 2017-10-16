@@ -1,4 +1,5 @@
 <?php
+
 namespace Components;
 
 class Router
@@ -23,26 +24,26 @@ class Router
 
             if (preg_match("~$uriPattern~", $uri)) {
 
-                $route = preg_replace("~$uriPattern~",$path, $uri);
+                $route = preg_replace("~$uriPattern~", $path, $uri);
 
                 $segments = explode('/', $route);
+                $pathView = $segments;
                 $controllerName = "controllers\\" . ucfirst(array_shift($segments)) . "Controller";
-                $actionName =  array_shift($segments) . "Action";
+                $actionName = array_shift($segments) . "Action";
 
 
-                if (class_exists($controllerName)){
+                if (class_exists($controllerName)) {
                     $cObj = new $controllerName;
-                    if (method_exists($cObj, $actionName)){
+                    if (method_exists($cObj, $actionName)) {
                         $cObj->$actionName($segments);
+                        $cObj->getView($pathView);
 
-                    }else{
+                    } else {
                         include "404.html";
-                        die();
                     }
 
-                }else{
+                } else {
                     include "404.html";
-                    die();
                 }
 
 

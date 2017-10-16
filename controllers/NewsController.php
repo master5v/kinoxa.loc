@@ -4,13 +4,13 @@ namespace Controllers;
 
 use Models\News;
 
-class NewsController
+class NewsController extends Controllers
 {
     public function indexAction()
     {
 
-      $data =  News::getNewsList();
-      debug($data);
+//      $data =  News::getNewsList();
+//      debug($data);
     }
 
     public function viewAction($arr)
