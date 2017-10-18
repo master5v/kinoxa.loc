@@ -1,13 +1,13 @@
 <?php
 
-namespace Components;
+namespace app\components;
 
 
 class Db
 {
     public static function getConnection(){
 
-        $dsn = 'mysql:dbname=tests;host=localhost';
+        $dsn = 'mysql:dbname=fw;host=localhost';
         $user = 'root';
         $password = '';
         $opt = array(

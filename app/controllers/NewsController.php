@@ -1,23 +1,25 @@
 <?php
 
-namespace Controllers;
+namespace app\controllers;
 
-use Models\News;
+
 
 class NewsController extends Controllers
 {
     public function indexAction()
     {
+        echo __METHOD__;
 
 //      $data =  News::getNewsList();
 //      debug($data);
     }
 
-    public function viewAction($arr)
+    public function viewAction()
     {
-//
+        echo __METHOD__;
 
-        $data =   News::getNewsbyid($arr[0]);
-        debug($data);
+
+
+//        debug($arr);
     }
 }

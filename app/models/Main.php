@@ -6,7 +6,7 @@
  * Time: 18:53
  */
 
-namespace Models;
+namespace app\models;
 
 
 class Main

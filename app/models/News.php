@@ -1,7 +1,7 @@
 <?php
 
-namespace Models;
-use Components\Db;
+namespace app\models;
+use app\components\Db;
 
 class News
 {
